@@ -1,15 +1,23 @@
 import conventionalPrompt from 'cz-conventional-changelog/prompt';
 import conventionalFormat from 'cz-conventional-changelog/format';
 
-import PackageUtilities from 'lerna/lib/PackageUtilities';
-import Repository from 'lerna/lib/Repository';
-
 import shell from 'shelljs';
 import path from 'path';
+import fs from 'fs';
 
 function getAllPackages () {
-  const packagesLocation = new Repository().packagesLocation;
-  return PackageUtilities.getPackages(packagesLocation);
+  const modulesPath = path.resolve('packages', 'node_modules');
+  const modules = fs.readdirSync(modulesPath);
+
+  return modules.map(function (moduleName) {
+      const modulePath = path.join(modulesPath, moduleName);
+      const modulePkg = JSON.parse(fs.readFileSync(path.join(modulePath, 'package.json'), 'utf8'));
+
+      return {
+          location: modulePath,
+          name: modulePkg.name
+      };
+  });
 }
 
 function isStatusStaged (statusLine) {

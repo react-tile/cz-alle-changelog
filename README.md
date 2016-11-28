@@ -1,11 +1,12 @@
-# cz-lerna-changelog
+# cz-alle-changelog
 
-Status:
-[![npm version](https://img.shields.io/npm/v/cz-lerna-changelog.svg?style=flat-square)](https://www.npmjs.org/package/cz-lerna-changelog)
-[![npm downloads](https://img.shields.io/npm/dm/cz-lerna-changelog.svg?style=flat-square)](http://npm-stat.com/charts.html?package=cz-lerna-changelog&from=2015-08-01)
-[![Build Status](https://img.shields.io/travis/atlassian/cz-lerna-changelog.svg?style=flat-square)](https://travis-ci.org/atlassian/cz-lerna-changelog)
+This is a fork of [cz-lerna-changelog](https://github.com/atlassian/cz-lerna-changelog)
 
-Part of the [commitizen](https://github.com/commitizen/cz-cli) family. Prompts for [conventional changelog](https://github.com/stevemao/conventional-changelog-angular/blob/master/index.js) standard in a [lerna](https://lernajs.io/) environment.
+This changelog generator inspects packages located in 'packages/node_modules/*'
+
+You can read about it here: https://github.com/boennemann/alle
+
+Part of the [commitizen](https://github.com/commitizen/cz-cli) family. Prompts for [conventional changelog](https://github.com/stevemao/conventional-changelog-angular/blob/master/index.js) standard in a [alle](https://github.com/boennemann/alle) environment.
 
 
 Example view (with a few components):
