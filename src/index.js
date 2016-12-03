@@ -9,15 +9,32 @@ function getAllPackages () {
   const modulesPath = path.resolve('packages', 'node_modules');
   const modules = fs.readdirSync(modulesPath);
 
-  return modules.map(function (moduleName) {
-      const modulePath = path.join(modulesPath, moduleName);
-      const modulePkg = JSON.parse(fs.readFileSync(path.join(modulePath, 'package.json'), 'utf8'));
+  return modules
+      .filter(function (moduleName) {
+          const modulePath = path.join(modulesPath, moduleName);
 
-      return {
-          location: modulePath,
-          name: modulePkg.name
-      };
-  });
+          try {
+              const dirStats = fs.statSync(modulePath);
+              if (!dirStats.isDirectory()) {
+                  return false;
+              }
+
+              const pkgStats = fs.statSync(path.join(modulePath, 'package.json'));
+              return pkgStats.isFile();
+          }
+          catch (e) {
+            return false;
+          }
+      })
+      .map(function (moduleName) {
+          const modulePath = path.join(modulesPath, moduleName);
+          const modulePkg = JSON.parse(fs.readFileSync(path.join(modulePath, 'package.json'), 'utf8'));
+
+          return {
+              location: modulePath,
+              name: modulePkg.name
+          };
+      });
 }
 
 function isStatusStaged (statusLine) {
